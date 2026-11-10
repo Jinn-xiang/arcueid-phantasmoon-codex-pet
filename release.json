@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "artRevision": "R17",
+  "format": "v2",
+  "image": {
+    "width": 1536,
+    "height": 2288,
+    "columns": 8,
+    "rows": 11,
+    "cellWidth": 192,
+    "cellHeight": 208
+  },
+  "framesPerRow": [
+    6,
+    8,
+    8,
+    4,
+    5,
+    8,
+    6,
+    6,
+    6,
+    8,
+    8
+  ],
+  "sha256": {
+    "pet/phantasmoon/pet.json": "431b65abdadc656c0950487ea5107cc86c2b6a079bc686242ae9bc990f2ee8d1",
+    "pet/phantasmoon/spritesheet.png": "b95e8cc0fee6649747ba0a7f69bc83cbf5f4691442c4844a5bc7ae93cc747b6a"
+  }
+}
