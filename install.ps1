@@ -14,6 +14,13 @@ $ErrorActionPreference = 'Stop'
 $petSha = 'f57032f553f4fae92b130fd6a485554b0942b300f0ac79955d61749f4c9b1ccd'
 $spriteSha = '8923d91d5b6ead77282b689c36eca57cd79c399fb1e96d3eddd5c1f73f0cde93'
 
+function Get-PayloadHash([string]$Path) {
+    $stream = [IO.File]::OpenRead($Path)
+    $algorithm = [Security.Cryptography.SHA256]::Create()
+    try { return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-', '').ToLowerInvariant() }
+    finally { $algorithm.Dispose(); $stream.Dispose() }
+}
+
 function Assert-DirectoryNotLink([string]$Path) {
     if (Test-Path -LiteralPath $Path) {
         $item = Get-Item -LiteralPath $Path -Force
@@ -90,8 +97,8 @@ try {
     }
     $manifestPath = Join-Path $payload 'pet.json'
     $spritePath = Join-Path $payload 'spritesheet.png'
-    if ((Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash -ne $petSha) { throw 'pet.json checksum mismatch; installation cancelled.' }
-    if ((Get-FileHash -LiteralPath $spritePath -Algorithm SHA256).Hash -ne $spriteSha) { throw 'spritesheet.png checksum mismatch; installation cancelled.' }
+    if ((Get-PayloadHash $manifestPath) -ne $petSha) { throw 'pet.json checksum mismatch; installation cancelled.' }
+    if ((Get-PayloadHash $spritePath) -ne $spriteSha) { throw 'spritesheet.png checksum mismatch; installation cancelled.' }
     $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
     if ($manifest.spriteVersionNumber -ne 2 -or $manifest.spritesheetPath -ne 'spritesheet.png') { throw 'Unexpected pet manifest.' }
     $imageBytes = [IO.File]::ReadAllBytes($spritePath)
@@ -100,7 +107,7 @@ try {
     foreach ($name in @('pet.json', 'spritesheet.png')) {
         $oldFile = Join-Path $target $name
         if (-not (Test-Path -LiteralPath $oldFile -PathType Leaf)) { $same = $false; break }
-        if ((Get-FileHash -LiteralPath $oldFile -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath (Join-Path $payload $name) -Algorithm SHA256).Hash) { $same = $false; break }
+        if ((Get-PayloadHash $oldFile) -ne (Get-PayloadHash (Join-Path $payload $name))) { $same = $false; break }
     }
     if ($same) { Write-Output 'This version is already installed. No replacement needed.'; return }
     [void][IO.Directory]::CreateDirectory((Join-Path $CodexHome 'pets'))
