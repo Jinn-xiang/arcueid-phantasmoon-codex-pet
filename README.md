@@ -149,22 +149,6 @@ bash ./install.sh --codex-home "$HOME/path/to/app-state"
 
 开发者可用 Python 3 运行 `python3 -m unittest discover -s tests -v`。Windows 测试会调用 Windows PowerShell；macOS 测试使用系统 Bash 3.2。最终用户安装无需 Python。
 
-## 发布到 GitHub
-
-1. 创建空的公开仓库，将本文中的 `Jinn-xiang/arcueid-phantasmoon-codex-pet` 替换为真实地址。
-2. 在当前本地仓库提交更新后的文件，并将尚未发布的本地草稿标签指向该提交：
-
-```bash
-git add .
-git commit -m "Prepare Phantasmoon v1.0.0 release"
-git tag -f v1.0.0
-git remote add origin https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet.git
-git push -u origin main
-git push origin v1.0.0
-```
-
-如果发布地址是在本地 ZIP 安装之后填写，也不影响离线安装。上传后可在 GitHub 的 Releases 中创建 `v1.0.0` 发布，用户即可下载源码 ZIP。
-
 ## 许可与来源
 
 角色与设定来自 TYPE-MOON / Fate 相关作品，本项目为非官方同人制作，图像经过 AI 辅助生成及多轮人工指导修订。
