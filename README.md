@@ -24,6 +24,14 @@
 
 **GitHub 仓库：[Jinn-xiang/arcueid-phantasmoon-codex-pet](https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet)。** 命令固定下载 `v1.0.0` 标签，发布时请同时推送该标签。
 
+### 让 Agent 帮你安装
+
+在当前使用的 Codex 桌面客户端中，把下面这句话发给 Agent：
+
+```text
+请帮我安装 https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet 的 v1.0.0 桌宠：先阅读 README 和对应系统的安装脚本，确认当前操作系统、正在使用的 Codex 桌面客户端及其实际数据目录（区分 Codex Pro 与普通 Codex，不要仅凭终端的 CODEX_HOME 判断），使用对应安装脚本并显式指定该目录，完成素材校验和旧版备份后安装；遇到必要的权限请求按当前环境流程处理，安装后核对文件并告诉我如何在当前客户端的「设置 → Pets」中刷新并选择 Phantasmoon，目录无法确认时先向我询问。
+```
+
 ### macOS
 
 在「终端」粘贴一行：
