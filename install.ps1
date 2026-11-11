@@ -11,8 +11,8 @@ param(
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-$petSha = '431b65abdadc656c0950487ea5107cc86c2b6a079bc686242ae9bc990f2ee8d1'
-$spriteSha = 'b95e8cc0fee6649747ba0a7f69bc83cbf5f4691442c4844a5bc7ae93cc747b6a'
+$petSha = 'f57032f553f4fae92b130fd6a485554b0942b300f0ac79955d61749f4c9b1ccd'
+$spriteSha = '8923d91d5b6ead77282b689c36eca57cd79c399fb1e96d3eddd5c1f73f0cde93'
 
 function Assert-DirectoryNotLink([string]$Path) {
     if (Test-Path -LiteralPath $Path) {
@@ -62,7 +62,7 @@ else {
     if (-not $Repository) { throw 'No local payload. Supply -Repository USER/REPO for online installation.' }
     $source = "https://raw.githubusercontent.com/$Repository/$Ref/pet/phantasmoon"
 }
-Write-Output "Phantasmoon 1.0.0 (R17)`nSource: $source`nTarget: $target"
+Write-Output "Phantasmoon 1.0.0 (R24)`nSource: $source`nTarget: $target"
 if ($DryRun) { Write-Output 'Dry run: no files changed or downloaded.'; return }
 
 $stage = $null

@@ -8,8 +8,8 @@ REPOSITORY=
 REF=v1.0.0
 ASSET_ROOT=
 DRY_RUN=0
-PET_SHA=431b65abdadc656c0950487ea5107cc86c2b6a079bc686242ae9bc990f2ee8d1
-SPRITE_SHA=b95e8cc0fee6649747ba0a7f69bc83cbf5f4691442c4844a5bc7ae93cc747b6a
+PET_SHA=f57032f553f4fae92b130fd6a485554b0942b300f0ac79955d61749f4c9b1ccd
+SPRITE_SHA=8923d91d5b6ead77282b689c36eca57cd79c399fb1e96d3eddd5c1f73f0cde93
 
 die() { printf 'Error: %s\n' "$*" >&2; exit 1; }
 usage() {
@@ -73,7 +73,7 @@ else
     [ -n "$REPOSITORY" ] || die 'No local payload. Supply --repository USER/REPO for online installation.'
     SOURCE="https://raw.githubusercontent.com/$REPOSITORY/$REF/pet/phantasmoon"
 fi
-printf 'Phantasmoon 1.0.0 (R17)\nSource: %s\nTarget: %s\n' "$SOURCE" "$TARGET"
+printf 'Phantasmoon 1.0.0 (R24)\nSource: %s\nTarget: %s\n' "$SOURCE" "$TARGET"
 [ "$DRY_RUN" -eq 0 ] || { printf 'Dry run: no files changed or downloaded.\n'; exit 0; }
 
 STAGE=

@@ -1,12 +1,18 @@
-# Phantasmoon 桌宠
+# 爱尔奎特 Phantasmoon Codex桌宠
 
-以 Phantasmoon（ファンタズムーン）第一再临形象制作的非官方 Q 版桌宠，供支持自定义 **v2 Pets** 的桌面客户端使用。
+**爱尔奎特·布伦史塔德**（アルクェイド・ブリュンスタッド，Arcueid Brunestud）是 TYPE-MOON 作品《月姬》中的人物，身份为真祖的公主。百度百科将她介绍为“《月姬》及其衍生作品中的女主角之一”。相关登场作品包括《月姬》及其重制版《月姬 -A piece of blue glass moon-》、《歌月十夜》、《MELTY BLOOD》系列、《幻想嘉年华》，以及漫画、动画《真月谭月姬》。资料参考：[百度百科：爱尔奎特·布伦史塔德](https://baike.baidu.com/item/爱尔奎特·布伦史塔德/577429)、[搜狗百科：爱尔奎特·布伦史塔德](https://baike.sogou.com/m/v2374384.htm)。
 
-当前版本：**v1.0.0 · 美术修订 R17**。包含轻快眨眼、左右移动、全身配合的挥手、失落表情、等待 wink，以及三种不同的魔法效果。
+本项目是以 **《Fate/Grand Order》（FGO）中 Phantasmoon（ファンタズムーン）第一再临形象**制作的非官方 Q 版桌宠，供支持自定义 **v2 Pets** 的 Codex 桌面客户端使用。Phantasmoon 是爱尔奎特的魔法少女形态，在 FGO 中以从者身份登场。资料参考：[百度百科：Phantasmoon](https://baike.baidu.com/item/Phantasmoon/65247763)。
+
+当前版本：**v1.0.0（首个正式版本）· 美术修订 R24**。包含轻快眨眼、左右移动、全身配合的挥手、失落表情、等待 wink、两种魔法效果，以及任务完成时的开心甩手和彩带庆祝。
 
 <img src="previews/idle.gif" alt="待机与轻快眨眼" width="280">
 
 [查看全部动作 GIF](previews/all-states.gif) · [下载动作预览 MP4](previews/all-states.mp4) · [精灵图](pet/phantasmoon/spritesheet.png)
+
+<img src="previews/completion-native.gif" alt="任务完成：闭眼张嘴笑、双手甩动与彩带庆祝" width="280">
+
+[完成提醒 GIF](previews/completion-native.gif) · [完成提醒 MP4](previews/completion-native.mp4) · [动作关键帧](previews/completion-stills.png)
 
 ## 安装前
 
@@ -16,14 +22,14 @@
 
 ## 一键在线安装
 
-**发布地址预留：`OWNER/REPO`。当前本地仓库尚未上传，以下在线命令须在发布后，将 `OWNER/REPO` 换成真实的“GitHub 用户名/仓库名”才能使用。** 命令固定下载 `v1.0.0` 标签，发布时请同时推送该标签。
+**GitHub 仓库：[Jinn-xiang/arcueid-phantasmoon-codex-pet](https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet)。** 命令固定下载 `v1.0.0` 标签，发布时请同时推送该标签。
 
 ### macOS
 
 在「终端」粘贴一行：
 
 ```bash
-REPO='OWNER/REPO'; curl -fsSL "https://raw.githubusercontent.com/$REPO/v1.0.0/install.sh" | bash -s -- --app pro --repository "$REPO" --ref v1.0.0
+REPO='Jinn-xiang/arcueid-phantasmoon-codex-pet'; curl -fsSL "https://raw.githubusercontent.com/$REPO/v1.0.0/install.sh" | bash -s -- --app pro --repository "$REPO" --ref v1.0.0
 ```
 
 ### Windows
@@ -31,7 +37,7 @@ REPO='OWNER/REPO'; curl -fsSL "https://raw.githubusercontent.com/$REPO/v1.0.0/in
 在 **Windows PowerShell 5.1 或 PowerShell 7** 粘贴一行：
 
 ```powershell
-$repo='OWNER/REPO'; & ([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/$repo/v1.0.0/install.ps1").Content)) -App pro -Repository $repo -Ref 'v1.0.0'
+$repo='Jinn-xiang/arcueid-phantasmoon-codex-pet'; & ([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/$repo/v1.0.0/install.ps1").Content)) -App pro -Repository $repo -Ref 'v1.0.0'
 ```
 
 这两条命令会执行仓库中的安装脚本。可先阅读 [macOS 脚本](install.sh) 或 [Windows 脚本](install.ps1)。Windows 命令不修改系统的脚本执行策略。
@@ -99,11 +105,14 @@ bash ./install.sh --codex-home "$HOME/path/to/app-state"
 
 包含九个动画状态和十六个注视方向，透明 RGBA 精灵图为 **1536 × 2288**，8 列 × 11 行，每格 192 × 208。详细帧布局见 [格式说明](docs/format.md)。
 
-三种魔法分别放在 `running`、`jumping`、`review` 状态中。具体触发、重复次数、播放速度与状态优先级由宿主应用控制；本素材包不会给客户端新增随机触发接口，也不能保证每次任务状态变化都会切换动作。预览中的顺序播放用于展示全部动作。
+`running` 为金色月环魔法，`jumping` 为蓝紫心形与星光魔法；`review` 已改为开心甩手和彩带庆祝，替换原先的金色星轨魔法。在制作环境的客户端中，任务完成产生未读提醒时会使用 `review`：6 帧时长依次为 150、150、150、150、150、280 ms，每轮约 1.03 秒，默认 3 轮约 3.09 秒。
+
+具体触发、重复次数、播放速度与状态优先级由宿主应用控制；当前正在查看的会话或其他高优先级提醒可能影响完成动作的显示。精灵图与安装脚本只提供各状态的画面，不为客户端新增事件监听或随机触发接口。预览中的顺序播放用于展示全部动作。
 
 ## 验证状态
 
-- R17 素材沿用制作时已通过验证的最终精灵图；发布包使用固定校验值。
+- R24 精灵图已通过制作时的 v2 布局、透明区域、帧检查、最终质量检查及 Pets 上传校验；发布包使用相同文件与固定校验值。
+- R24 仅替换 `review` 动作；其他动画状态和十六个注视方向与 R17 逐像素一致。
 - macOS 安装器已在隔离的模拟数据目录中验证安装、重复安装、备份、校验失败保护和目录选择。
 - Windows 安装器附带相同的自动化测试；**尚未在真实 Windows 桌面客户端中验证显示效果**。仓库附带的 CI 会在上传 GitHub 后运行 Windows 和 macOS 安装测试。
 
@@ -111,14 +120,14 @@ bash ./install.sh --codex-home "$HOME/path/to/app-state"
 
 ## 发布到 GitHub
 
-1. 创建空的公开仓库，将本文中的 `OWNER/REPO` 替换为真实地址。
-2. 在当前本地仓库提交 README 修改，并将发布标签移到该提交：
+1. 创建空的公开仓库，将本文中的 `Jinn-xiang/arcueid-phantasmoon-codex-pet` 替换为真实地址。
+2. 在当前本地仓库提交更新后的文件，并将尚未发布的本地草稿标签指向该提交：
 
 ```bash
-git add README.md
-git commit -m "Set GitHub repository address"
+git add .
+git commit -m "Prepare Phantasmoon v1.0.0 release"
 git tag -f v1.0.0
-git remote add origin https://github.com/OWNER/REPO.git
+git remote add origin https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet.git
 git push -u origin main
 git push origin v1.0.0
 ```
