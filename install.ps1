@@ -12,7 +12,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $petSha = 'f57032f553f4fae92b130fd6a485554b0942b300f0ac79955d61749f4c9b1ccd'
-$spriteSha = '8923d91d5b6ead77282b689c36eca57cd79c399fb1e96d3eddd5c1f73f0cde93'
+$spriteSha = '7a30f473ded4aa91d9cc10bb386c1a96f09699ccb4c7d25ff9419c6314e3e4f7'
 
 function Get-PayloadHash([string]$Path) {
     $stream = [IO.File]::OpenRead($Path)

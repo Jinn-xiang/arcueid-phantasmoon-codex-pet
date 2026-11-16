@@ -9,7 +9,7 @@ REF=v1.0.0
 ASSET_ROOT=
 DRY_RUN=0
 PET_SHA=f57032f553f4fae92b130fd6a485554b0942b300f0ac79955d61749f4c9b1ccd
-SPRITE_SHA=8923d91d5b6ead77282b689c36eca57cd79c399fb1e96d3eddd5c1f73f0cde93
+SPRITE_SHA=7a30f473ded4aa91d9cc10bb386c1a96f09699ccb4c7d25ff9419c6314e3e4f7
 
 die() { printf 'Error: %s\n' "$*" >&2; exit 1; }
 usage() {
