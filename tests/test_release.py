@@ -2,6 +2,7 @@
 import hashlib
 import json
 import os
+from fractions import Fraction
 from pathlib import Path
 import re
 import shutil
@@ -29,6 +30,32 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256((ROOT / name).read_bytes()).hexdigest(), expected)
             for script in ("install.sh", "install.ps1"):
                 self.assertIn(expected, (ROOT / script).read_text(encoding="ascii"))
+
+    def test_levitation_timing_and_idle_region(self):
+        data = (ASSETS / "spritesheet.png").read_bytes()
+        release = json.loads((ROOT / "release.json").read_text(encoding="utf-8"))
+        offset = 8
+        animation = None
+        frames = []
+        while offset < len(data):
+            length, chunk_type = struct.unpack_from(">I4s", data, offset)
+            if chunk_type == b"acTL":
+                animation = struct.unpack_from(">II", data, offset + 8)
+            elif chunk_type == b"fcTL":
+                frames.append(struct.unpack_from(">IIIIIHHBB", data, offset + 8))
+            offset += 12 + length
+
+        self.assertGreater(len(frames), 1)
+        self.assertEqual(animation, (len(frames), 0))
+        self.assertEqual(frames[0][1:5], (1536, 2288, 0, 0))
+        durations = [Fraction(frame[5], frame[6] or 100) for frame in frames]
+        self.assertEqual(durations[0], 1796)
+        self.assertEqual(sum(durations[1:]), 4)
+        self.assertEqual(sum(durations)*1000, 1_800_000)
+        self.assertEqual(release["idleLevitationIntervalMs"], 1_800_000)
+        for frame in frames[1:]:
+            self.assertEqual(frame[1:5], (1152, 208, 0, 0))
+            self.assertEqual(frame[-2:], (0, 0))
 
     def test_public_payload_has_no_account_binding(self):
         manifest = json.loads((ASSETS / "pet.json").read_text(encoding="utf-8"))

@@ -5,11 +5,11 @@ set -euo pipefail
 APP=auto
 TARGET_HOME=
 REPOSITORY=
-REF=v1.0.0
+REF=v1.0.1
 ASSET_ROOT=
 DRY_RUN=0
-PET_SHA=f57032f553f4fae92b130fd6a485554b0942b300f0ac79955d61749f4c9b1ccd
-SPRITE_SHA=7a30f473ded4aa91d9cc10bb386c1a96f09699ccb4c7d25ff9419c6314e3e4f7
+PET_SHA=07d3b112eef0f529fa168cfdc744122e29a3bd01494a59592221f3da7c10a06f
+SPRITE_SHA=29c8495c38528392833a23d07b4465705db27e94fbd719fc6fe2e2c2f47aa9a8
 
 die() { printf 'Error: %s\n' "$*" >&2; exit 1; }
 usage() {
@@ -18,7 +18,7 @@ Usage: bash install.sh [options]
   --app pro|codex|auto   Target app (auto uses CODEX_HOME, then existing homes)
   --codex-home PATH     Explicit existing app state directory; highest priority
   --repository USER/REPO  GitHub source for online installation
-  --ref TAG            Git tag or branch (default: v1.0.0)
+  --ref TAG            Git tag or branch (default: v1.0.1)
   --asset-root PATH    Local folder containing pet.json and spritesheet.png
   --dry-run            Print plan without writing or downloading anything
   --help               Show this help
@@ -73,7 +73,7 @@ else
     [ -n "$REPOSITORY" ] || die 'No local payload. Supply --repository USER/REPO for online installation.'
     SOURCE="https://raw.githubusercontent.com/$REPOSITORY/$REF/pet/phantasmoon"
 fi
-printf 'Phantasmoon 1.0.0 (R24)\nSource: %s\nTarget: %s\n' "$SOURCE" "$TARGET"
+printf 'Phantasmoon 1.0.1 (R24)\nSource: %s\nTarget: %s\n' "$SOURCE" "$TARGET"
 [ "$DRY_RUN" -eq 0 ] || { printf 'Dry run: no files changed or downloaded.\n'; exit 0; }
 
 STAGE=

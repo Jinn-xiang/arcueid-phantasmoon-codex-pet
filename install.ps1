@@ -5,14 +5,14 @@ param(
     [ValidateSet('pro', 'codex', 'auto')][string]$App = 'auto',
     [string]$CodexHome = '',
     [string]$Repository = '',
-    [ValidatePattern('^[A-Za-z0-9][A-Za-z0-9._-]*$')][string]$Ref = 'v1.0.0',
+    [ValidatePattern('^[A-Za-z0-9][A-Za-z0-9._-]*$')][string]$Ref = 'v1.0.1',
     [string]$AssetRoot = '',
     [switch]$DryRun
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-$petSha = 'f57032f553f4fae92b130fd6a485554b0942b300f0ac79955d61749f4c9b1ccd'
-$spriteSha = '7a30f473ded4aa91d9cc10bb386c1a96f09699ccb4c7d25ff9419c6314e3e4f7'
+$petSha = '07d3b112eef0f529fa168cfdc744122e29a3bd01494a59592221f3da7c10a06f'
+$spriteSha = '29c8495c38528392833a23d07b4465705db27e94fbd719fc6fe2e2c2f47aa9a8'
 
 function Get-PayloadHash([string]$Path) {
     $stream = [IO.File]::OpenRead($Path)
@@ -69,7 +69,7 @@ else {
     if (-not $Repository) { throw 'No local payload. Supply -Repository USER/REPO for online installation.' }
     $source = "https://raw.githubusercontent.com/$Repository/$Ref/pet/phantasmoon"
 }
-Write-Output "Phantasmoon 1.0.0 (R24)`nSource: $source`nTarget: $target"
+Write-Output "Phantasmoon 1.0.1 (R24)`nSource: $source`nTarget: $target"
 if ($DryRun) { Write-Output 'Dry run: no files changed or downloaded.'; return }
 
 $stage = $null

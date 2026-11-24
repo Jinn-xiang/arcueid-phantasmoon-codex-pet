@@ -4,9 +4,11 @@
 
 本项目是以 **《Fate/Grand Order》（FGO）中 Phantasmoon（ファンタズムーン）第一再临形象**制作的非官方 Q 版桌宠，供支持自定义 **v2 Pets** 的 Codex 桌面客户端使用。Phantasmoon 是爱尔奎特的魔法少女形态，在 FGO 中以从者身份登场。资料参考：[百度百科：Phantasmoon](https://baike.baidu.com/item/Phantasmoon/65247763)。
 
-当前版本：**v1.0.0（首个正式版本）· 美术修订 R24**。包含轻快眨眼、左右移动、全身配合的挥手、失落表情、等待 wink、两种魔法效果，以及任务完成时的开心甩手和彩带庆祝。
+当前版本为 **v1.0.1**。待机时每 30 分钟播放一次白光悬浮，也包含轻快眨眼、左右移动、挥手、等待 wink、两种魔法和完成时的甩手庆祝。
 
-<img src="previews/idle.gif" alt="待机与轻快眨眼" width="280">
+<img src="previews/levitation.gif" alt="闭眼浮起时亮起白光，落地睁眼" width="280">
+
+白光悬浮预览省略了等待时间。
 
 [查看全部动作 GIF](previews/all-states.gif) · [下载动作预览 MP4](previews/all-states.mp4) · [精灵图](pet/phantasmoon/spritesheet.png)
 
@@ -22,14 +24,14 @@
 
 ## 一键在线安装
 
-**GitHub 仓库：[Jinn-xiang/arcueid-phantasmoon-codex-pet](https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet)。** 命令固定下载 `v1.0.0` 标签，发布时请同时推送该标签。
+**GitHub 仓库：[Jinn-xiang/arcueid-phantasmoon-codex-pet](https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet)。** 安装命令固定使用 `v1.0.1` 的文件。
 
 ### 让 Agent 帮你安装
 
 在当前使用的 Codex 桌面客户端中，把下面这句话发给 Agent：
 
 ```text
-请帮我安装 https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet 的 v1.0.0 桌宠：先阅读 README 和对应系统的安装脚本，确认当前操作系统、正在使用的 Codex 桌面客户端及其实际数据目录（区分 Codex Pro 与普通 Codex，不要仅凭终端的 CODEX_HOME 判断），使用对应安装脚本并显式指定该目录，完成素材校验和旧版备份后安装；遇到必要的权限请求按当前环境流程处理，安装后核对文件并告诉我如何在当前客户端的「设置 → Pets」中刷新并选择 Phantasmoon，目录无法确认时先向我询问。
+请帮我安装 https://github.com/Jinn-xiang/arcueid-phantasmoon-codex-pet 的 v1.0.1 桌宠：先阅读 README 和对应系统的安装脚本，确认当前操作系统、正在使用的 Codex 桌面客户端及其实际数据目录（区分 Codex Pro 与普通 Codex，不要仅凭终端的 CODEX_HOME 判断），使用对应安装脚本并显式指定该目录，完成素材校验和旧版备份后安装；遇到必要的权限请求按当前环境流程处理，安装后核对文件并告诉我如何在当前客户端的「设置 → Pets」中刷新并选择 Phantasmoon，目录无法确认时先向我询问。
 ```
 
 ### macOS
@@ -37,7 +39,7 @@
 在「终端」粘贴一行：
 
 ```bash
-REPO='Jinn-xiang/arcueid-phantasmoon-codex-pet'; curl -fsSL "https://raw.githubusercontent.com/$REPO/v1.0.0/install.sh" | bash -s -- --app pro --repository "$REPO" --ref v1.0.0
+REPO='Jinn-xiang/arcueid-phantasmoon-codex-pet'; curl -fsSL "https://raw.githubusercontent.com/$REPO/v1.0.1/install.sh" | bash -s -- --app pro --repository "$REPO" --ref v1.0.1
 ```
 
 ### Windows
@@ -45,7 +47,7 @@ REPO='Jinn-xiang/arcueid-phantasmoon-codex-pet'; curl -fsSL "https://raw.githubu
 在 **Windows PowerShell 5.1 或 PowerShell 7** 粘贴一行：
 
 ```powershell
-$repo='Jinn-xiang/arcueid-phantasmoon-codex-pet'; & ([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/$repo/v1.0.0/install.ps1").Content)) -App pro -Repository $repo -Ref 'v1.0.0'
+$repo='Jinn-xiang/arcueid-phantasmoon-codex-pet'; & ([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/$repo/v1.0.1/install.ps1").Content)) -App pro -Repository $repo -Ref 'v1.0.1'
 ```
 
 这两条命令会执行仓库中的安装脚本。可先阅读 [macOS 脚本](install.sh) 或 [Windows 脚本](install.ps1)。Windows 命令不修改系统的脚本执行策略。
@@ -119,7 +121,7 @@ bash ./install.sh --codex-home "$HOME/path/to/app-state"
 
 | 动画类型 | 状态 / 帧数 | 小人的表现 | 触发场景 |
 | --- | --- | --- | --- |
-| 日常待机 | `idle` / 6 帧 | 轻微呼吸与轻快眨眼 | 没有其他交互或任务提醒动画时；提醒动画播完后也会回到待机 |
+| 日常待机与白光悬浮 | `idle` / 6 个格位 | 平时轻快眨眼，到点时闭眼浮起，白光渐亮，落地睁眼 | 桌宠持续显示时，每 30 分钟循环一次。到点时需要处于待机状态 |
 | 向右移动 | `running-right` / 8 帧 | 朝右迈步，身体、手臂和魔杖配合移动 | 用鼠标向右拖动桌宠时 |
 | 向左移动 | `running-left` / 8 帧 | 朝左迈步，与右移方向对应 | 用鼠标向左拖动桌宠时 |
 | 挥手招呼 | `waving` / 4 帧 | 空着的左手挥动，身体与头发配合，带 wink | 桌宠首次唤出或客户端触发唤醒招呼时 |
@@ -136,12 +138,11 @@ bash ./install.sh --codex-home "$HOME/path/to/app-state"
 
 **任务状态变化不等于每次都会播放动画。** 当前正在查看的会话可能被客户端过滤掉普通的进行中、完成提醒，因此可以在任务活动列表里看到任务，而桌宠没有立刻切换动作。提醒动画播放完毕后也可能回到待机，即使任务仍在进行中。
 
-具体触发、重复次数、播放速度与状态优先级由宿主应用控制；当前正在查看的会话或其他高优先级提醒可能影响完成动作的显示。精灵图与安装脚本只提供各状态的画面，不为客户端新增事件监听或随机触发接口。预览中的顺序播放用于展示全部动作。
+白光悬浮按本地图集的时间播放，一轮为 30 分钟，动作约 4 秒。桌宠重新打开或图集重新载入时可能重新计时。若到点时正在播放其他动作，本轮可能错过悬浮。其他状态的触发与优先级由桌面客户端控制。
 
 ## 验证状态
 
-- R24 精灵图已通过制作时的 v2 布局、透明区域、帧检查、最终质量检查及 Pets 上传校验；发布包使用相同文件与固定校验值。
-- R24 仅替换 `review` 动作；其他动画状态和十六个注视方向与 R17 逐像素一致。
+- v1.0.1 已通过 v2 图集布局和帧时长校验。Chromium 解码确认周期为 30 分钟，加速测试确认白光悬浮只更新待机格。
 - macOS 安装器已在隔离的模拟数据目录中验证安装、重复安装、备份、校验失败保护和目录选择。
 - Windows 安装器附带相同的自动化测试；**尚未在真实 Windows 桌面客户端中验证显示效果**。仓库附带的 CI 会在上传 GitHub 后运行 Windows 和 macOS 安装测试。
 
